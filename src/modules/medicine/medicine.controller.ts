@@ -129,11 +129,9 @@ export const updateMedicine = async (
       where: { id: id as string },
     });
     if (!existingMedicine || existingMedicine.sellerId !== sellerId) {
-      res
-        .status(403)
-        .json({
-          message: "Sorry, you are not authorized to update this medicine.",
-        });
+      res.status(403).json({
+        message: "Sorry, you are not authorized to update this medicine.",
+      });
       return;
     }
 
@@ -172,7 +170,9 @@ export const deleteMedicine = async (
     if (!existingMedicine || existingMedicine.sellerId !== sellerId) {
       res
         .status(403)
-        .json({ message: "You are not authorized to delete this medicine." });
+        .json({
+          message: "Sorry, you are not authorized to delete this medicine.",
+        });
       return;
     }
 
