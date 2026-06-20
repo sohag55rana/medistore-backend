@@ -83,7 +83,7 @@ export const getAllMedicines = async (
 
     res.status(200).json(medicines);
   } catch (error) {
-    res.status(500).json({ message: "Failed to retrieve medicines." });
+    res.status(500).json({ message: "Sorry, Failed to retrieve medicines." });
   }
 };
 
