@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// user table here (Role: CUSTOMER, SELLER, ADMIN)
+enum Role {
+  CUSTOMER
+  SELLER
+  ADMIN
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  name      String
+  role      Role       @default(CUSTOMER)
+  isBanned  Boolean    @default(false)
+  medicines Medicine[]
+  orders    Order[]
+  reviews   Review[]
+  createdAt DateTime   @default(now())
+}
+
+// category table
+model Category {
+  id        String     @id @default(uuid())
+  name      String     @unique
+  medicines Medicine[]
+}
+
+// medicine table
+model Medicine {
+  id           String      @id @default(uuid())
+  name         String
+  description  String
+  price        Float
+  stock        Int
+  manufacturer String
+  categoryId   String
+  category     Category    @relation(fields: [categoryId], references: [id])
+  sellerId     String
+  seller       User        @relation(fields: [sellerId], references: [id])
+  orderItems   OrderItem[]
+  reviews      Review[]
+}
+
+// order table
+enum OrderStatus {
+  PLACED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  customerId      String
+  customer        User        @relation(fields: [customerId], references: [id])
+  shippingAddress String
+  status          OrderStatus @default(PLACED)
+  totalAmount     Float
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+}
+
+model OrderItem {
+  id         String   @id @default(uuid())
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id])
+  medicineId String
+  medicine   Medicine @relation(fields: [medicineId], references: [id])
+  quantity   Int
+  price      Float
+}
+
+// review table
+model Review {
+  id         String   @id @default(uuid())
+  rating     Int
+  comment    String
+  userId     String   @map("customerId")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  medicineId String
+  medicine   Medicine @relation(fields: [medicineId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+}
