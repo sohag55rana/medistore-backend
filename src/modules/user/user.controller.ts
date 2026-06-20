@@ -70,7 +70,9 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     if (user.isBanned) {
       res
         .status(403)
-        .json({ message: "Your account has been temporarily suspended." });
+        .json({
+          message: "Sorry, your account has been temporarily suspended.",
+        });
       return;
     }
 
