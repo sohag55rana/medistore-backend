@@ -27,11 +27,9 @@ export const createReview = async (
     });
 
     if (!hasOrdered) {
-      res
-        .status(403)
-        .json({
-          message: "Sorry, you can only review medicines you have ordered.",
-        });
+      res.status(403).json({
+        message: "Sorry, you can only review medicines you have ordered.",
+      });
       return;
     }
 
@@ -51,7 +49,7 @@ export const createReview = async (
       .status(201)
       .json({ message: "Review added successfully!", review: newReview });
   } catch (error) {
-    res.status(500).json({ message: "Error occurred while adding review." });
+    res.status(500).json({ message: "Error occurred while adding review ok." });
   }
 };
 
