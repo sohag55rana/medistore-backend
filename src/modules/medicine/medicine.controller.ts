@@ -112,7 +112,7 @@ export const getAllCategories = async (
     const categories = await prisma.category.findMany();
     res.status(200).json(categories);
   } catch (error) {
-    res.status(500).json({ message: "Failed to retrieve categories." });
+    res.status(500).json({ message: "Sorry, Failed to retrieve categories." });
   }
 };
 
@@ -168,11 +168,9 @@ export const deleteMedicine = async (
       where: { id: id as string },
     });
     if (!existingMedicine || existingMedicine.sellerId !== sellerId) {
-      res
-        .status(403)
-        .json({
-          message: "Sorry, you are not authorized to delete this medicine.",
-        });
+      res.status(403).json({
+        message: "Sorry, you are not authorized to delete this medicine.",
+      });
       return;
     }
 
