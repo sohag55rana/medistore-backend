@@ -131,7 +131,9 @@ export const updateMedicine = async (
     if (!existingMedicine || existingMedicine.sellerId !== sellerId) {
       res
         .status(403)
-        .json({ message: "You are not authorized to update this medicine." });
+        .json({
+          message: "Sorry, you are not authorized to update this medicine.",
+        });
       return;
     }
 
