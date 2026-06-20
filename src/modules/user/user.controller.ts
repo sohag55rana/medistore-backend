@@ -68,17 +68,15 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     }
 
     if (user.isBanned) {
-      res
-        .status(403)
-        .json({
-          message: "Sorry, your account has been temporarily suspended.",
-        });
+      res.status(403).json({
+        message: "Sorry, your account has been temporarily suspended.",
+      });
       return;
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
-      res.status(400).json({ message: "Invalid email or password." });
+      res.status(400).json({ message: "Invalid email or wrong password." });
       return;
     }
 
