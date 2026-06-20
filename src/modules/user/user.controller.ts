@@ -43,7 +43,7 @@ export const registerUser = async (
     });
 
     res.status(201).json({
-      message: "Registration successful!",
+      message: "Thank You for Registration successful!",
       user: newUser,
     });
   } catch (error) {
