@@ -38,7 +38,7 @@ export const verifyTokenAndRole = (allowedRoles: string[]) => {
     } catch (error) {
       res
         .status(403)
-        .json({ message: "Access denied. Invalid or expired token." });
+        .json({ message: "Access denied. Invalid token or expired token." });
     }
   };
 };
