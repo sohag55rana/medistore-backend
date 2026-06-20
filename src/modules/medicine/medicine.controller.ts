@@ -100,7 +100,7 @@ export const getSingleMedicine = async (req: Request, res: Response) => {
 
     res.status(200).json(medicine);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch medicine details" });
+    res.status(500).json({ message: "Failed to fetch this medicine details" });
   }
 };
 

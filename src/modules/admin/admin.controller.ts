@@ -36,6 +36,6 @@ export const toggleUserBan = async (
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error occurred while updating user status." });
+      .json({ message: "Error an occurred while updating user status." });
   }
 };
