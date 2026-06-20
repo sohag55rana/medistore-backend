@@ -14,7 +14,7 @@ async function server() {
     await prisma.$disconnect();
 
     app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT} `);
+      console.log(`Server is running on port ${PORT} continue`);
     });
   } catch (error) {
     console.error("Database connection failed:", error);
