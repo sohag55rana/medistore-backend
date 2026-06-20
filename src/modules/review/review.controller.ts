@@ -29,7 +29,9 @@ export const createReview = async (
     if (!hasOrdered) {
       res
         .status(403)
-        .json({ message: "You can only review medicines you have ordered." });
+        .json({
+          message: "Sorry, you can only review medicines you have ordered.",
+        });
       return;
     }
 
