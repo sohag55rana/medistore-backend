@@ -15,6 +15,14 @@ export const createOrder = async (
       return;
     }
 
+    if (req.user?.role !== "CUSTOMER") {
+      res.status(403).json({
+        message:
+          "Access Denied: Only customers can place orders. Sellers or Admins are not allowed.",
+      });
+      return;
+    }
+
     let totalAmount = 0;
     for (const item of items) {
       totalAmount += item.price * item.quantity;
